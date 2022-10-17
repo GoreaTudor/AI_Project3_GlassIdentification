@@ -25,8 +25,8 @@ namespace Glass_Identification {
         /// </summary>
         private void InitializeComponent () {
             this.btn_load = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dataGridView_dataset = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_dataset)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_load
@@ -40,26 +40,29 @@ namespace Glass_Identification {
             this.btn_load.UseVisualStyleBackColor = true;
             this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
-            // dataGridView1
+            // dataGridView_dataset
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 59);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(775, 379);
-            this.dataGridView1.TabIndex = 1;
+            this.dataGridView_dataset.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView_dataset.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_dataset.Location = new System.Drawing.Point(13, 59);
+            this.dataGridView_dataset.Name = "dataGridView_dataset";
+            this.dataGridView_dataset.RowHeadersWidth = 51;
+            this.dataGridView_dataset.RowTemplate.Height = 24;
+            this.dataGridView_dataset.Size = new System.Drawing.Size(775, 379);
+            this.dataGridView_dataset.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView_dataset);
             this.Controls.Add(this.btn_load);
             this.Name = "MainForm";
             this.Text = "MainForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_dataset)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -67,6 +70,6 @@ namespace Glass_Identification {
         #endregion
 
         private System.Windows.Forms.Button btn_load;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_dataset;
     }
 }
