@@ -1,0 +1,10 @@
+C:\Users\Tudor\source\repos\Glass_Identification\bin\Debug\Glass_Identification.exe.config
+C:\Users\Tudor\source\repos\Glass_Identification\bin\Debug\Glass_Identification.exe
+C:\Users\Tudor\source\repos\Glass_Identification\bin\Debug\Glass_Identification.pdb
+C:\Users\Tudor\source\repos\Glass_Identification\obj\Debug\Glass_Identification.csproj.AssemblyReference.cache
+C:\Users\Tudor\source\repos\Glass_Identification\obj\Debug\Glass_Identification.MainForm.resources
+C:\Users\Tudor\source\repos\Glass_Identification\obj\Debug\Glass_Identification.Properties.Resources.resources
+C:\Users\Tudor\source\repos\Glass_Identification\obj\Debug\Glass_Identification.csproj.GenerateResource.cache
+C:\Users\Tudor\source\repos\Glass_Identification\obj\Debug\Glass_Identification.csproj.CoreCompileInputs.cache
+C:\Users\Tudor\source\repos\Glass_Identification\obj\Debug\Glass_Identification.exe
+C:\Users\Tudor\source\repos\Glass_Identification\obj\Debug\Glass_Identification.pdb
