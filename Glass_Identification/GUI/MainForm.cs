@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Glass_Identification {
     public partial class MainForm : Form {
         public MainForm () {
             InitializeComponent ();
+        }
+
+        private void btn_load_Click (object sender, EventArgs e) {
+            ;
         }
     }
 }
