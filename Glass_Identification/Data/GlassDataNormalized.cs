@@ -34,6 +34,29 @@ namespace Glass_Identification.Data {
         public double Type_7 { get; set; }
 
 
+        public GlassDataNormalized (GlassDataRaw raw) {
+            this.ID = raw.ID;
+
+            this.RefractiveIndex        = (raw.RefractiveIndex      - DataMinMax.min_RI) / (DataMinMax.max_RI - DataMinMax.min_RI);  // 2 - RI
+            this.SodiumPercentage       = (raw.SodiumPercentage     - DataMinMax.min_Na) / (DataMinMax.max_Na - DataMinMax.min_Na);  // 3 - Na
+            this.MagnesiumPercentage    = (raw.MagnesiumPercentage  - DataMinMax.min_Mg) / (DataMinMax.max_Mg - DataMinMax.min_Mg);  // 4 - Mg
+            this.AluminumPercentage     = (raw.AluminumPercentage   - DataMinMax.min_Al) / (DataMinMax.max_Al - DataMinMax.min_Al);  // 5 - Al
+            this.SiliconPercentage      = (raw.SiliconPercentage    - DataMinMax.min_Si) / (DataMinMax.max_Si - DataMinMax.min_Si);  // 6 - Si
+            this.PotassiumPercentage    = (raw.PotassiumPercentage  - DataMinMax.min_K)  / (DataMinMax.max_K  - DataMinMax.min_K);   // 7 - K
+            this.CalciumPercentage      = (raw.CalciumPercentage    - DataMinMax.min_Ca) / (DataMinMax.max_Ca - DataMinMax.min_Ca);  // 8 - Ca
+            this.BariumPercentage       = (raw.BariumPercentage     - DataMinMax.min_Ba) / (DataMinMax.max_Ba - DataMinMax.min_Ba);  // 9 - Ba
+            this.IronPercentage         = (raw.IronPercentage       - DataMinMax.min_Fe) / (DataMinMax.max_Fe - DataMinMax.min_Fe);  // 10 - Fe
+
+            this.Type_1 = (raw.TypeOfGlass == 1) ? 1 : 0;
+            this.Type_2 = (raw.TypeOfGlass == 2) ? 1 : 0;
+            this.Type_3 = (raw.TypeOfGlass == 3) ? 1 : 0;
+            this.Type_4 = (raw.TypeOfGlass == 4) ? 1 : 0;
+            this.Type_5 = (raw.TypeOfGlass == 5) ? 1 : 0;
+            this.Type_6 = (raw.TypeOfGlass == 6) ? 1 : 0;
+            this.Type_7 = (raw.TypeOfGlass == 7) ? 1 : 0;
+        }
+
+
         public List <double> getInputs () {
             List <double> inputs = new List <double> ();
             inputs.Add (RefractiveIndex);

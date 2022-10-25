@@ -49,6 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DataMinMax.cs" />
+    <Compile Include="Data\DataUtilities.cs" />
     <Compile Include="Data\GlassDataRaw.cs" />
     <Compile Include="Data\GlassDataNormalized.cs" />
     <Compile Include="Global.cs" />

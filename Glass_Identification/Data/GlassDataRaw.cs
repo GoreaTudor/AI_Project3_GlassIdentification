@@ -11,7 +11,7 @@ namespace Glass_Identification.Data {
         public double SodiumPercentage { get; set; }        // 3 - Na %
         public double MagnesiumPercentage { get; set; }     // 4 - Mg %
         public double AluminumPercentage { get; set; }      // 5 - Al %
-        public double SiliconPercentage { get; set; }       // 6 - Si &
+        public double SiliconPercentage { get; set; }       // 6 - Si %
         public double PotassiumPercentage { get; set; }     // 7 - K %
         public double CalciumPercentage { get; set; }       // 8 - Ca %
         public double BariumPercentage { get; set; }        // 9 - Ba %

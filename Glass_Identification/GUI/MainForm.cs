@@ -29,16 +29,32 @@ namespace Glass_Identification {
         }
         #endregion
 
+        private bool rawDataLoaded = false;
+        private bool dataNormalized = false;
+
 
         private void tabChange (int index) {
             Console.WriteLine (this.mainTabControl.SelectedIndex);
 
             if (index >= 0) { // load raw data
-                T1_loadData ();
+                if (!rawDataLoaded) {
+                    T1_loadData ();
+
+                    rawDataLoaded = true;
+                }
             }
 
             if (index >= 1) { // normalize data, shuffle and split (70% - training, 30% - testing)
-                ;
+                if (!dataNormalized) {
+                    List<GlassDataNormalized> normalizedData = DataUtilities.NormalizeData (Global.RawData);
+                    DataUtilities.ShuffleData (normalizedData);
+                    DataUtilities.SplitData (normalizedData);
+
+                    T2_loadData ();
+
+                    dataNormalized = true;
+                }
+                
             }
 
             if (index >= 2) { // prepare and train the network
@@ -57,6 +73,8 @@ namespace Glass_Identification {
         }
 
         private void T1_loadData () {
+            t1_dataGridView_raw.Rows.Clear ();
+
             using (var reader = new StreamReader (HiddenClass.datasetPath)) {
                 string line;
                 string[] values;
@@ -144,16 +162,55 @@ namespace Glass_Identification {
             dataGridView.Columns[16].Name = "Type 7 - headlamps";
         }
 
-        private List <GlassDataNormalized> T2_normalizeData (List <GlassDataRaw> rawData) {
-            return null;
-        }
+        private void T2_loadData () {
+            t2_dataGridView_training.Rows.Clear();
+            foreach (GlassDataNormalized item in Global.TrainingData) {
+                t2_dataGridView_training.Rows.Add (
+                    item.ID,
+                    item.RefractiveIndex,       // 2
+                    item.SodiumPercentage,      // 3
+                    item.MagnesiumPercentage,   // 4
+                    item.AluminumPercentage,    // 5
+                    item.SiliconPercentage,     // 6
+                    item.PotassiumPercentage,   // 7
+                    item.CalciumPercentage,     // 8
+                    item.BariumPercentage,      // 9
+                    item.IronPercentage,        // 10
 
-        private void T2_shuffleList (List <GlassDataNormalized> list) {
-            ;
-        }
+                    item.Type_1,
+                    item.Type_2,
+                    item.Type_3,
+                    item.Type_4,
+                    item.Type_5,
+                    item.Type_6,
+                    item.Type_7
+                );
+            }
 
-        private void T2_splitList (List <GlassDataNormalized> list) {
-            ;
+            t2_dataGridView_testing.Rows.Clear ();
+            foreach (GlassDataNormalized item in Global.TestingData) {
+                t2_dataGridView_testing.Rows.Add (
+                    item.ID,
+                    item.RefractiveIndex,       // 2
+                    item.SodiumPercentage,      // 3
+                    item.MagnesiumPercentage,   // 4
+                    item.AluminumPercentage,    // 5
+                    item.SiliconPercentage,     // 6
+                    item.PotassiumPercentage,   // 7
+                    item.CalciumPercentage,     // 8
+                    item.BariumPercentage,      // 9
+                    item.IronPercentage,        // 10
+
+                    item.Type_1,
+                    item.Type_1,
+                    item.Type_2,
+                    item.Type_3,
+                    item.Type_4,
+                    item.Type_5,
+                    item.Type_6,
+                    item.Type_7
+                );
+            }
         }
         #endregion
 

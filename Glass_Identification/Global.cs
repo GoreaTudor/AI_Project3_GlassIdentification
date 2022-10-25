@@ -18,10 +18,17 @@ namespace Glass_Identification {
 
 
         ///// NORMALIZED DATA /////
-        private static List<GlassDataNormalized> normalizedData = new List<GlassDataNormalized> ();
-        public static List<GlassDataNormalized> NormalizedData {
+        private static List<GlassDataNormalized> trainingData = new List<GlassDataNormalized> ();
+        public static List<GlassDataNormalized> TrainingData {
             get {
-                return normalizedData;
+                return trainingData;
+            }
+        }
+
+        private static List<GlassDataNormalized> testingData = new List<GlassDataNormalized> ();
+        public static List<GlassDataNormalized> TestingData {
+            get {
+                return testingData;
             }
         }
 
