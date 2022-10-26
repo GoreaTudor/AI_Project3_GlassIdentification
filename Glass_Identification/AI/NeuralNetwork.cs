@@ -35,14 +35,14 @@ namespace Glass_Identification.AI {
 
             for (int l = 1; l <= numberOfLayers - 2; l++) {
                 layers[l].neurons = new HiddenNeuron[neuronsPerHL[l - 1]];
-                for (int n = 0; n < layers[0].NumberOfNeurons; n++) {
-                    layers[0].neurons[n] = new HiddenNeuron ();
+                for (int n = 0; n < layers[l].NumberOfNeurons; n++) {
+                    layers[l].neurons[n] = new HiddenNeuron ();
                 }
             }
 
             layers[numberOfLayers - 1].neurons = new OutputNeuron[Global.NumberOfOutputs];
-            for (int n = 0; n < layers[0].NumberOfNeurons; n++) {
-                layers[0].neurons[n] = new OutputNeuron ();
+            for (int n = 0; n < layers[numberOfLayers - 1].NumberOfNeurons; n++) {
+                layers[numberOfLayers - 1].neurons[n] = new OutputNeuron ();
             }
 
 

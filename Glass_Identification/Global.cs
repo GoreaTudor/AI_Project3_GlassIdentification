@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Glass_Identification.Data;
+using Glass_Identification.AI;
 
 namespace Glass_Identification {
     public class Global {
@@ -34,6 +35,8 @@ namespace Glass_Identification {
 
 
         ///// OTHER /////
+        public static NeuralNetwork network = null;
+
         public static readonly int NumberOfInputs = 9;
         public static readonly int NumberOfOutputs = 7;
 

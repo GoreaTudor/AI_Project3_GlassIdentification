@@ -34,8 +34,15 @@ namespace Glass_Identification {
             this.t2_dataGridView_testing = new System.Windows.Forms.DataGridView();
             this.t2_dataGridView_training = new System.Windows.Forms.DataGridView();
             this.tabPage_trainingGraph = new System.Windows.Forms.TabPage();
+            this.t3_btn_stop = new System.Windows.Forms.Button();
+            this.t3_btn_start = new System.Windows.Forms.Button();
+            this.t3_lbl_learningRate = new System.Windows.Forms.Label();
+            this.t3_numericUpDown_learningRate = new System.Windows.Forms.NumericUpDown();
+            this.t3_btn_network = new System.Windows.Forms.Button();
             this.t3_zedGraphControl = new ZedGraph.ZedGraphControl();
             this.tabPage_testing = new System.Windows.Forms.TabPage();
+            this.t3_numericUpDown_epsilon = new System.Windows.Forms.NumericUpDown();
+            this.lbl_espilon = new System.Windows.Forms.Label();
             this.mainTabControl.SuspendLayout();
             this.tabPage_rawData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.t1_dataGridView_raw)).BeginInit();
@@ -43,6 +50,8 @@ namespace Glass_Identification {
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_testing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_training)).BeginInit();
             this.tabPage_trainingGraph.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_learningRate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_epsilon)).BeginInit();
             this.SuspendLayout();
             // 
             // mainTabControl
@@ -142,6 +151,13 @@ namespace Glass_Identification {
             // 
             // tabPage_trainingGraph
             // 
+            this.tabPage_trainingGraph.Controls.Add(this.lbl_espilon);
+            this.tabPage_trainingGraph.Controls.Add(this.t3_numericUpDown_epsilon);
+            this.tabPage_trainingGraph.Controls.Add(this.t3_btn_stop);
+            this.tabPage_trainingGraph.Controls.Add(this.t3_btn_start);
+            this.tabPage_trainingGraph.Controls.Add(this.t3_lbl_learningRate);
+            this.tabPage_trainingGraph.Controls.Add(this.t3_numericUpDown_learningRate);
+            this.tabPage_trainingGraph.Controls.Add(this.t3_btn_network);
             this.tabPage_trainingGraph.Controls.Add(this.t3_zedGraphControl);
             this.tabPage_trainingGraph.Location = new System.Drawing.Point(4, 29);
             this.tabPage_trainingGraph.Name = "tabPage_trainingGraph";
@@ -150,12 +166,81 @@ namespace Glass_Identification {
             this.tabPage_trainingGraph.Text = "Training Graph";
             this.tabPage_trainingGraph.UseVisualStyleBackColor = true;
             // 
+            // t3_btn_stop
+            // 
+            this.t3_btn_stop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.t3_btn_stop.BackColor = System.Drawing.Color.Red;
+            this.t3_btn_stop.Enabled = false;
+            this.t3_btn_stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t3_btn_stop.Location = new System.Drawing.Point(1369, 460);
+            this.t3_btn_stop.Name = "t3_btn_stop";
+            this.t3_btn_stop.Size = new System.Drawing.Size(80, 40);
+            this.t3_btn_stop.TabIndex = 5;
+            this.t3_btn_stop.Text = "Stop";
+            this.t3_btn_stop.UseVisualStyleBackColor = false;
+            this.t3_btn_stop.Click += new System.EventHandler(this.t3_btn_stop_Click);
+            // 
+            // t3_btn_start
+            // 
+            this.t3_btn_start.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.t3_btn_start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.t3_btn_start.Enabled = false;
+            this.t3_btn_start.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t3_btn_start.Location = new System.Drawing.Point(1283, 460);
+            this.t3_btn_start.Name = "t3_btn_start";
+            this.t3_btn_start.Size = new System.Drawing.Size(80, 40);
+            this.t3_btn_start.TabIndex = 4;
+            this.t3_btn_start.Text = "Start";
+            this.t3_btn_start.UseVisualStyleBackColor = false;
+            this.t3_btn_start.Click += new System.EventHandler(this.t3_btn_start_Click);
+            // 
+            // t3_lbl_learningRate
+            // 
+            this.t3_lbl_learningRate.AutoSize = true;
+            this.t3_lbl_learningRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t3_lbl_learningRate.Location = new System.Drawing.Point(9, 460);
+            this.t3_lbl_learningRate.Name = "t3_lbl_learningRate";
+            this.t3_lbl_learningRate.Size = new System.Drawing.Size(139, 25);
+            this.t3_lbl_learningRate.TabIndex = 3;
+            this.t3_lbl_learningRate.Text = "Learning Rate:";
+            // 
+            // t3_numericUpDown_learningRate
+            // 
+            this.t3_numericUpDown_learningRate.DecimalPlaces = 1;
+            this.t3_numericUpDown_learningRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t3_numericUpDown_learningRate.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.t3_numericUpDown_learningRate.Location = new System.Drawing.Point(167, 458);
+            this.t3_numericUpDown_learningRate.Name = "t3_numericUpDown_learningRate";
+            this.t3_numericUpDown_learningRate.Size = new System.Drawing.Size(120, 30);
+            this.t3_numericUpDown_learningRate.TabIndex = 2;
+            this.t3_numericUpDown_learningRate.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            // 
+            // t3_btn_network
+            // 
+            this.t3_btn_network.BackColor = System.Drawing.Color.Lime;
+            this.t3_btn_network.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t3_btn_network.Location = new System.Drawing.Point(5, 3);
+            this.t3_btn_network.Name = "t3_btn_network";
+            this.t3_btn_network.Size = new System.Drawing.Size(200, 40);
+            this.t3_btn_network.TabIndex = 1;
+            this.t3_btn_network.Text = "Generate Network";
+            this.t3_btn_network.UseVisualStyleBackColor = false;
+            this.t3_btn_network.Click += new System.EventHandler(this.t3_btn_network_Click);
+            // 
             // t3_zedGraphControl
             // 
             this.t3_zedGraphControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.t3_zedGraphControl.Location = new System.Drawing.Point(5, 5);
-            this.t3_zedGraphControl.Margin = new System.Windows.Forms.Padding(5);
+            this.t3_zedGraphControl.Location = new System.Drawing.Point(5, 51);
+            this.t3_zedGraphControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.t3_zedGraphControl.Name = "t3_zedGraphControl";
             this.t3_zedGraphControl.ScrollGrace = 0D;
             this.t3_zedGraphControl.ScrollMaxX = 0D;
@@ -176,6 +261,35 @@ namespace Glass_Identification {
             this.tabPage_testing.Text = "Testing";
             this.tabPage_testing.UseVisualStyleBackColor = true;
             // 
+            // t3_numericUpDown_epsilon
+            // 
+            this.t3_numericUpDown_epsilon.DecimalPlaces = 1;
+            this.t3_numericUpDown_epsilon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t3_numericUpDown_epsilon.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.t3_numericUpDown_epsilon.Location = new System.Drawing.Point(167, 494);
+            this.t3_numericUpDown_epsilon.Name = "t3_numericUpDown_epsilon";
+            this.t3_numericUpDown_epsilon.Size = new System.Drawing.Size(120, 30);
+            this.t3_numericUpDown_epsilon.TabIndex = 6;
+            this.t3_numericUpDown_epsilon.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            // 
+            // lbl_espilon
+            // 
+            this.lbl_espilon.AutoSize = true;
+            this.lbl_espilon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_espilon.Location = new System.Drawing.Point(9, 496);
+            this.lbl_espilon.Name = "lbl_espilon";
+            this.lbl_espilon.Size = new System.Drawing.Size(87, 25);
+            this.lbl_espilon.TabIndex = 7;
+            this.lbl_espilon.Text = "Epsilon: ";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -192,6 +306,9 @@ namespace Glass_Identification {
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_testing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_training)).EndInit();
             this.tabPage_trainingGraph.ResumeLayout(false);
+            this.tabPage_trainingGraph.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_learningRate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_epsilon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -209,5 +326,12 @@ namespace Glass_Identification {
         private System.Windows.Forms.Label t2_lbl_training;
         private System.Windows.Forms.Label t2_lbl_testing;
         private ZedGraph.ZedGraphControl t3_zedGraphControl;
+        private System.Windows.Forms.Button t3_btn_network;
+        private System.Windows.Forms.Label t3_lbl_learningRate;
+        private System.Windows.Forms.NumericUpDown t3_numericUpDown_learningRate;
+        private System.Windows.Forms.Button t3_btn_stop;
+        private System.Windows.Forms.Button t3_btn_start;
+        private System.Windows.Forms.NumericUpDown t3_numericUpDown_epsilon;
+        private System.Windows.Forms.Label lbl_espilon;
     }
 }

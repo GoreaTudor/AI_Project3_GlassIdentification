@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Glass_Identification.Data;
+using Glass_Identification.GUI;
+using Glass_Identification.AI;
 
 namespace Glass_Identification {
     public partial class MainForm : Form {
@@ -28,6 +30,24 @@ namespace Glass_Identification {
         #region Events
         private void mainTabControl_SelectedIndexChanged (object sender, EventArgs e) {
             tabChange (this.mainTabControl.SelectedIndex);
+        }
+
+        private void t3_btn_network_Click (object sender, EventArgs e) {
+            List <int> neuronsPerHL = new List <int> ();
+            GenerateNetworkForm form = new GenerateNetworkForm(neuronsPerHL);
+            form.ShowDialog ();
+
+            Global.network = new NeuralNetwork (neuronsPerHL);
+
+            int x = 10;
+        }
+
+        private void t3_btn_start_Click (object sender, EventArgs e) {
+            Console.WriteLine ("Start");
+        }
+
+        private void t3_btn_stop_Click (object sender, EventArgs e) {
+            Console.WriteLine ("Stop");
         }
         #endregion
 
@@ -228,6 +248,9 @@ namespace Glass_Identification {
         private void T4_setup () {
 
         }
+
         #endregion
+
+        
     }
 }

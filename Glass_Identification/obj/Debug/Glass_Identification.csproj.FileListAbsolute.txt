@@ -34,3 +34,5 @@ C:\Users\Tudor\source\repos\AI_Project3\AI_Project3_GlassIdentification\Glass_Id
 C:\Users\Tudor\source\repos\AI_Project3\AI_Project3_GlassIdentification\Glass_Identification\bin\Debug\zh-cn\ZedGraph.resources.dll
 C:\Users\Tudor\source\repos\AI_Project3\AI_Project3_GlassIdentification\Glass_Identification\bin\Debug\zh-tw\ZedGraph.resources.dll
 C:\Users\Tudor\source\repos\AI_Project3\AI_Project3_GlassIdentification\Glass_Identification\obj\Debug\Glass_Identification.csproj.CopyComplete
+C:\Users\Tudor\source\repos\AI_Project3\AI_Project3_GlassIdentification\Glass_Identification\obj\Debug\Glass_Identification.GUI.GenerateNetworkForm.resources
+C:\Users\Tudor\source\repos\AI_Project3\AI_Project3_GlassIdentification\Glass_Identification\obj\Debug\Glass_Identification.GUI.ValueUserControl.resources
