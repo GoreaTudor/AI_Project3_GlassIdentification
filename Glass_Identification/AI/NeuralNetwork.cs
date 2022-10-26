@@ -10,6 +10,8 @@ namespace Glass_Identification.AI {
         private Layer[] layers;
         public int NumberOfLayers { get { return layers.Length; } }
 
+        private double epoch_error_sum;
+
         /// <summary>
         /// Generates a neural network
         /// </summary>
@@ -71,6 +73,59 @@ namespace Glass_Identification.AI {
 
 
         #region Training
+        public void backpropagation (double[] inputs, double[] target, double learningRate) {
+            /// Feedforward ///
+            double[] output = feedforward (inputs);
+
+
+            /// Mean Square Error ///
+            double mse = 0;
+            for (int i = 0; i < Global.NumberOfOutputs; i ++) {
+                double val = target[i] - output[i];
+                mse += val * val;
+            }
+            mse /= 2.0 * Global.NumberOfOutputs;
+            epoch_error_sum += mse;
+
+
+            /// Calculate deltas ///
+            Layer OL = layers[NumberOfLayers - 1];
+            for (int n = 0; n < OL.NumberOfNeurons; n ++) {
+                Neuron neuron = OL.neurons[n];
+                neuron.delta = (neuron.output - target[n]) * neuron.f_derivative (neuron.output);
+            }
+
+            for (int l = NumberOfLayers - 2; l >= 0; l --) {
+                Layer curr_layer = layers[l];
+                Layer next_layer = layers[l + 1];
+
+                for (int n = 0; n < curr_layer.NumberOfNeurons; n ++) {
+                    Neuron neuron = curr_layer.neurons[n];
+
+                    double sum = 0.0;
+                    foreach (Neuron next_neuron in next_layer.neurons) {
+                        sum += next_neuron.delta * next_neuron.weights[n];
+                    }
+
+                    neuron.delta = sum * neuron.f_derivative (neuron.output);
+                }
+            }
+
+
+            /// Change weights ///
+            for (int l = 1; l < NumberOfLayers; l ++) {
+                Layer layer = layers[l];
+
+                for (int n = 0; n < layer.NumberOfNeurons; n ++) {
+                    Neuron neuron = layer.neurons[n];
+
+                    for (int w = 0; w < neuron.NumberOfWeights; w ++) {
+                        double d_w = learningRate * layers[l - 1].neurons[w].output * neuron.delta;
+                        neuron.weights[w] += d_w;
+                    }
+                }
+            }
+        }
         #endregion
 
 
