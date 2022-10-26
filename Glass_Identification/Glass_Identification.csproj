@@ -49,6 +49,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\InputNeuron.cs" />
+    <Compile Include="AI\NeuralNetwork.cs" />
+    <Compile Include="AI\Neuron.cs" />
     <Compile Include="Data\DataMinMax.cs" />
     <Compile Include="Data\DataUtilities.cs" />
     <Compile Include="Data\GlassDataRaw.cs" />
@@ -88,8 +91,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

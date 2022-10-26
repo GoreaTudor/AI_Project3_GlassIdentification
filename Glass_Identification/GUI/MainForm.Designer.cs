@@ -34,8 +34,8 @@ namespace Glass_Identification {
             this.t2_dataGridView_testing = new System.Windows.Forms.DataGridView();
             this.t2_dataGridView_training = new System.Windows.Forms.DataGridView();
             this.tabPage_trainingGraph = new System.Windows.Forms.TabPage();
-            this.tabPage_testing = new System.Windows.Forms.TabPage();
             this.t3_zedGraphControl = new ZedGraph.ZedGraphControl();
+            this.tabPage_testing = new System.Windows.Forms.TabPage();
             this.mainTabControl.SuspendLayout();
             this.tabPage_rawData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.t1_dataGridView_raw)).BeginInit();
@@ -150,21 +150,12 @@ namespace Glass_Identification {
             this.tabPage_trainingGraph.Text = "Training Graph";
             this.tabPage_trainingGraph.UseVisualStyleBackColor = true;
             // 
-            // tabPage_testing
-            // 
-            this.tabPage_testing.Location = new System.Drawing.Point(4, 29);
-            this.tabPage_testing.Name = "tabPage_testing";
-            this.tabPage_testing.Size = new System.Drawing.Size(1452, 724);
-            this.tabPage_testing.TabIndex = 3;
-            this.tabPage_testing.Text = "Testing";
-            this.tabPage_testing.UseVisualStyleBackColor = true;
-            // 
             // t3_zedGraphControl
             // 
             this.t3_zedGraphControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.t3_zedGraphControl.Location = new System.Drawing.Point(5, 5);
-            this.t3_zedGraphControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.t3_zedGraphControl.Margin = new System.Windows.Forms.Padding(5);
             this.t3_zedGraphControl.Name = "t3_zedGraphControl";
             this.t3_zedGraphControl.ScrollGrace = 0D;
             this.t3_zedGraphControl.ScrollMaxX = 0D;
@@ -175,6 +166,15 @@ namespace Glass_Identification {
             this.t3_zedGraphControl.ScrollMinY2 = 0D;
             this.t3_zedGraphControl.Size = new System.Drawing.Size(1442, 400);
             this.t3_zedGraphControl.TabIndex = 0;
+            // 
+            // tabPage_testing
+            // 
+            this.tabPage_testing.Location = new System.Drawing.Point(4, 29);
+            this.tabPage_testing.Name = "tabPage_testing";
+            this.tabPage_testing.Size = new System.Drawing.Size(1452, 724);
+            this.tabPage_testing.TabIndex = 3;
+            this.tabPage_testing.Text = "Testing";
+            this.tabPage_testing.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

@@ -34,5 +34,10 @@ namespace Glass_Identification {
 
 
         ///// OTHER /////
+        public static readonly int NumberOfInputs = 9;
+        public static readonly int NumberOfOutputs = 7;
+
+        private static Random rnd = new Random();
+        public static Random random { get { return rnd; } }
     }
 }

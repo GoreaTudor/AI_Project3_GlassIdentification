@@ -19,6 +19,8 @@ namespace Glass_Identification {
             T2_setup ();
             T3_setup ();
             T4_setup ();
+
+            ;
             
             tabChange (this.mainTabControl.SelectedIndex);
         }
