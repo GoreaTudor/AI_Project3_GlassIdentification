@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Glass_Identification.AI {
     class HiddenNeuron : Neuron {
-        public override double[] propagateForward (double[] weights, double[] inputs) {
-            return null;
+
+        public HiddenNeuron () { }
+
+        public override double f (double x) { 
+            return NeuralNetworkUtilities.TanH (x); 
+        }
+
+        public override double f_derivative (double x) { 
+            return NeuralNetworkUtilities.TanH_derivative (x); 
         }
     }
 }

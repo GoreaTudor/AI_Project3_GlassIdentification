@@ -28,6 +28,18 @@ namespace Glass_Identification.AI {
         public double output { get; set; }
         public double delta { get; set; }
 
-        public abstract double[] propagateForward (double[] weights, double[] inputs);
+        public double propagateForward (double[] inputs) {
+            double globalInput = 0.0;
+
+            for (int w = 0; w < NumberOfWeights; w++) {
+                globalInput += weights[w] * inputs[w];
+            }
+
+            this.output = f (globalInput);
+            return this.output;
+        }
+
+        public abstract double f (double x);
+        public abstract double f_derivative (double x);
     }
 }

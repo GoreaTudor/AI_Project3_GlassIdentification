@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Glass_Identification.AI {
     class InputNeuron : Neuron {
-        public override double[] propagateForward (double[] weights, double[] inputs) { // it's not called
-            return null;
+
+        public InputNeuron () { }
+
+        public override double f (double x) { 
+            return x; 
+        }
+
+        public override double f_derivative (double x) { 
+            return x; 
         }
     }
 }

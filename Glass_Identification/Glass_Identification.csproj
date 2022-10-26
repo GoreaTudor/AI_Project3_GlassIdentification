@@ -49,9 +49,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\HiddenNeuron.cs" />
     <Compile Include="AI\InputNeuron.cs" />
+    <Compile Include="AI\Layer.cs" />
     <Compile Include="AI\NeuralNetwork.cs" />
+    <Compile Include="AI\NeuralNetworkUtilities.cs" />
     <Compile Include="AI\Neuron.cs" />
+    <Compile Include="AI\OutputNeuron.cs" />
     <Compile Include="Data\DataMinMax.cs" />
     <Compile Include="Data\DataUtilities.cs" />
     <Compile Include="Data\GlassDataRaw.cs" />

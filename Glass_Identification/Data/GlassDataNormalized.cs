@@ -57,30 +57,30 @@ namespace Glass_Identification.Data {
         }
 
 
-        public List <double> getInputs () {
-            List <double> inputs = new List <double> ();
-            inputs.Add (RefractiveIndex);
-            inputs.Add (SodiumPercentage);
-            inputs.Add (MagnesiumPercentage);
-            inputs.Add (AluminumPercentage);
-            inputs.Add (SiliconPercentage);
-            inputs.Add (PotassiumPercentage);
-            inputs.Add (CalciumPercentage);
-            inputs.Add (BariumPercentage);
-            inputs.Add (IronPercentage);
+        public double[] getInputs () {
+            double[] inputs = new double[Global.NumberOfInputs];
+            inputs[0] = RefractiveIndex;
+            inputs[1] = SodiumPercentage;
+            inputs[2] = MagnesiumPercentage;
+            inputs[3] = AluminumPercentage;
+            inputs[4] = SiliconPercentage;
+            inputs[5] = PotassiumPercentage;
+            inputs[6] = CalciumPercentage;
+            inputs[7] = BariumPercentage;
+            inputs[8] = IronPercentage;
 
             return inputs;
         }
 
-        public List <double> getOutputs() {
-            List <double> outputs = new List <double> ();
-            outputs.Add (Type_1);
-            outputs.Add (Type_2);
-            outputs.Add (Type_3);
-            outputs.Add (Type_4);
-            outputs.Add (Type_5);
-            outputs.Add (Type_6);
-            outputs.Add (Type_7);
+        public double[] getOutputs() {
+            double[] outputs = new double[Global.NumberOfOutputs];
+            outputs[0] = Type_1;
+            outputs[1] = Type_2;
+            outputs[2] = Type_3;
+            outputs[3] = Type_4;
+            outputs[4] = Type_5;
+            outputs[5] = Type_6;
+            outputs[6] = Type_7;
 
             return outputs;
         }
