@@ -54,6 +54,12 @@ namespace Glass_Identification {
         private bool rawDataLoaded = false;
         private bool dataNormalized = false;
 
+        private bool networkGenerated {
+            get {
+                return (Global.network != null);
+            }
+        }
+
 
         private void tabChange (int index) {
             Console.WriteLine (this.mainTabControl.SelectedIndex);
@@ -84,7 +90,11 @@ namespace Glass_Identification {
             }
 
             if (index >= 3) {
-                ;
+                if (networkGenerated) { // enable train buttons
+                    ;
+                }
+
+                T4_loadData ();
             }
         }
 
@@ -239,18 +249,50 @@ namespace Glass_Identification {
 
         #region Tab 3 - training graph
         private void T3_setup () {
-
+            if (Global.network == null) {
+                this.t3_btn_start.Enabled = false;
+                this.t3_btn_stop.Enabled = false;
+            }
         }
         #endregion
 
 
         #region Tab 4 - testing
         private void T4_setup () {
-
+            T4_setupDGV (t4_dataGridView_testing);
         }
 
+        private void T4_setupDGV (DataGridView dataGridView) {
+            T2_setupDGV (dataGridView);
+        }
+
+        private void T4_loadData () {
+            t4_dataGridView_testing.Rows.Clear ();
+            foreach (GlassDataNormalized item in Global.TestingData) {
+                t4_dataGridView_testing.Rows.Add (
+                    item.ID,
+                    item.RefractiveIndex,       // 2
+                    item.SodiumPercentage,      // 3
+                    item.MagnesiumPercentage,   // 4
+                    item.AluminumPercentage,    // 5
+                    item.SiliconPercentage,     // 6
+                    item.PotassiumPercentage,   // 7
+                    item.CalciumPercentage,     // 8
+                    item.BariumPercentage,      // 9
+                    item.IronPercentage,        // 10
+
+                    item.Type_1,
+                    item.Type_1,
+                    item.Type_2,
+                    item.Type_3,
+                    item.Type_4,
+                    item.Type_5,
+                    item.Type_6,
+                    item.Type_7
+                );
+            }
+        }
         #endregion
 
-        
     }
 }

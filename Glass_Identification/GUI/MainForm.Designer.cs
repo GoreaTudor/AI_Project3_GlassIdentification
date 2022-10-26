@@ -34,6 +34,8 @@ namespace Glass_Identification {
             this.t2_dataGridView_testing = new System.Windows.Forms.DataGridView();
             this.t2_dataGridView_training = new System.Windows.Forms.DataGridView();
             this.tabPage_trainingGraph = new System.Windows.Forms.TabPage();
+            this.lbl_espilon = new System.Windows.Forms.Label();
+            this.t3_numericUpDown_epsilon = new System.Windows.Forms.NumericUpDown();
             this.t3_btn_stop = new System.Windows.Forms.Button();
             this.t3_btn_start = new System.Windows.Forms.Button();
             this.t3_lbl_learningRate = new System.Windows.Forms.Label();
@@ -41,8 +43,8 @@ namespace Glass_Identification {
             this.t3_btn_network = new System.Windows.Forms.Button();
             this.t3_zedGraphControl = new ZedGraph.ZedGraphControl();
             this.tabPage_testing = new System.Windows.Forms.TabPage();
-            this.t3_numericUpDown_epsilon = new System.Windows.Forms.NumericUpDown();
-            this.lbl_espilon = new System.Windows.Forms.Label();
+            this.t4_dataGridView_testing = new System.Windows.Forms.DataGridView();
+            this.t4_lbl_testDataset = new System.Windows.Forms.Label();
             this.mainTabControl.SuspendLayout();
             this.tabPage_rawData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.t1_dataGridView_raw)).BeginInit();
@@ -50,8 +52,10 @@ namespace Glass_Identification {
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_testing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_training)).BeginInit();
             this.tabPage_trainingGraph.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_learningRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_epsilon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_learningRate)).BeginInit();
+            this.tabPage_testing.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.t4_dataGridView_testing)).BeginInit();
             this.SuspendLayout();
             // 
             // mainTabControl
@@ -166,6 +170,35 @@ namespace Glass_Identification {
             this.tabPage_trainingGraph.Text = "Training Graph";
             this.tabPage_trainingGraph.UseVisualStyleBackColor = true;
             // 
+            // lbl_espilon
+            // 
+            this.lbl_espilon.AutoSize = true;
+            this.lbl_espilon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_espilon.Location = new System.Drawing.Point(9, 496);
+            this.lbl_espilon.Name = "lbl_espilon";
+            this.lbl_espilon.Size = new System.Drawing.Size(87, 25);
+            this.lbl_espilon.TabIndex = 7;
+            this.lbl_espilon.Text = "Epsilon: ";
+            // 
+            // t3_numericUpDown_epsilon
+            // 
+            this.t3_numericUpDown_epsilon.DecimalPlaces = 1;
+            this.t3_numericUpDown_epsilon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t3_numericUpDown_epsilon.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.t3_numericUpDown_epsilon.Location = new System.Drawing.Point(167, 494);
+            this.t3_numericUpDown_epsilon.Name = "t3_numericUpDown_epsilon";
+            this.t3_numericUpDown_epsilon.Size = new System.Drawing.Size(120, 30);
+            this.t3_numericUpDown_epsilon.TabIndex = 6;
+            this.t3_numericUpDown_epsilon.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            // 
             // t3_btn_stop
             // 
             this.t3_btn_stop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -240,7 +273,7 @@ namespace Glass_Identification {
             this.t3_zedGraphControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.t3_zedGraphControl.Location = new System.Drawing.Point(5, 51);
-            this.t3_zedGraphControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.t3_zedGraphControl.Margin = new System.Windows.Forms.Padding(5);
             this.t3_zedGraphControl.Name = "t3_zedGraphControl";
             this.t3_zedGraphControl.ScrollGrace = 0D;
             this.t3_zedGraphControl.ScrollMaxX = 0D;
@@ -254,6 +287,8 @@ namespace Glass_Identification {
             // 
             // tabPage_testing
             // 
+            this.tabPage_testing.Controls.Add(this.t4_dataGridView_testing);
+            this.tabPage_testing.Controls.Add(this.t4_lbl_testDataset);
             this.tabPage_testing.Location = new System.Drawing.Point(4, 29);
             this.tabPage_testing.Name = "tabPage_testing";
             this.tabPage_testing.Size = new System.Drawing.Size(1452, 724);
@@ -261,34 +296,28 @@ namespace Glass_Identification {
             this.tabPage_testing.Text = "Testing";
             this.tabPage_testing.UseVisualStyleBackColor = true;
             // 
-            // t3_numericUpDown_epsilon
+            // t4_dataGridView_testing
             // 
-            this.t3_numericUpDown_epsilon.DecimalPlaces = 1;
-            this.t3_numericUpDown_epsilon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.t3_numericUpDown_epsilon.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.t3_numericUpDown_epsilon.Location = new System.Drawing.Point(167, 494);
-            this.t3_numericUpDown_epsilon.Name = "t3_numericUpDown_epsilon";
-            this.t3_numericUpDown_epsilon.Size = new System.Drawing.Size(120, 30);
-            this.t3_numericUpDown_epsilon.TabIndex = 6;
-            this.t3_numericUpDown_epsilon.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
+            this.t4_dataGridView_testing.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.t4_dataGridView_testing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.t4_dataGridView_testing.Location = new System.Drawing.Point(8, 316);
+            this.t4_dataGridView_testing.Name = "t4_dataGridView_testing";
+            this.t4_dataGridView_testing.RowHeadersWidth = 51;
+            this.t4_dataGridView_testing.RowTemplate.Height = 24;
+            this.t4_dataGridView_testing.Size = new System.Drawing.Size(1436, 400);
+            this.t4_dataGridView_testing.TabIndex = 1;
             // 
-            // lbl_espilon
+            // t4_lbl_testDataset
             // 
-            this.lbl_espilon.AutoSize = true;
-            this.lbl_espilon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_espilon.Location = new System.Drawing.Point(9, 496);
-            this.lbl_espilon.Name = "lbl_espilon";
-            this.lbl_espilon.Size = new System.Drawing.Size(87, 25);
-            this.lbl_espilon.TabIndex = 7;
-            this.lbl_espilon.Text = "Epsilon: ";
+            this.t4_lbl_testDataset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.t4_lbl_testDataset.AutoSize = true;
+            this.t4_lbl_testDataset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t4_lbl_testDataset.Location = new System.Drawing.Point(8, 277);
+            this.t4_lbl_testDataset.Name = "t4_lbl_testDataset";
+            this.t4_lbl_testDataset.Size = new System.Drawing.Size(134, 25);
+            this.t4_lbl_testDataset.TabIndex = 0;
+            this.t4_lbl_testDataset.Text = "Test Dataset: ";
             // 
             // MainForm
             // 
@@ -307,8 +336,11 @@ namespace Glass_Identification {
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_training)).EndInit();
             this.tabPage_trainingGraph.ResumeLayout(false);
             this.tabPage_trainingGraph.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_learningRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_epsilon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_learningRate)).EndInit();
+            this.tabPage_testing.ResumeLayout(false);
+            this.tabPage_testing.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.t4_dataGridView_testing)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -333,5 +365,7 @@ namespace Glass_Identification {
         private System.Windows.Forms.Button t3_btn_start;
         private System.Windows.Forms.NumericUpDown t3_numericUpDown_epsilon;
         private System.Windows.Forms.Label lbl_espilon;
+        private System.Windows.Forms.Label t4_lbl_testDataset;
+        private System.Windows.Forms.DataGridView t4_dataGridView_testing;
     }
 }
