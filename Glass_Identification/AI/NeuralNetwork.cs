@@ -73,55 +73,79 @@ namespace Glass_Identification.AI {
 
 
         #region Training
+        private void calculateStepError (double[] output, double[] target) {
+            /// Mean Square Error ///
+            double sum_error = 0;
+
+            for (int i = 0; i < Global.NumberOfOutputs; i++) {
+                double val = target[i] - output[i];
+
+                sum_error += val * val;
+            }
+
+            double mse = sum_error / (2.0 * Global.NumberOfOutputs);
+            epoch_error_sum += mse;
+        }
+
         public void backpropagation (double[] inputs, double[] target, double learningRate) {
             /// Feedforward ///
             double[] output = feedforward (inputs);
 
 
             /// Mean Square Error ///
-            double sum_error = 0;
-            for (int i = 0; i < Global.NumberOfOutputs; i ++) {
-                double val = target[i] - output[i];
-                sum_error += val * val;
-            }
-            double mse = sum_error / (2.0 * Global.NumberOfOutputs);
-            epoch_error_sum += mse;
+            calculateStepError (output, target);
 
 
-            /// Calculate deltas ///
-            Layer OL = layers[NumberOfLayers - 1];
-            for (int n = 0; n < OL.NumberOfNeurons; n ++) {
+            ///// OL /////
+            Layer OL = layers[layers.Length - 1];
+            Layer last_HL = layers[layers.Length - 2];
+
+            // for each neuron in OL
+            for (int n = 0; n < OL.NumberOfNeurons; n ++) { 
                 Neuron neuron = OL.neurons[n];
-                neuron.delta = (neuron.output - target[n]) * neuron.f_derivative (neuron.globalInput);
-            }
 
-            for (int l = NumberOfLayers - 2; l >= 0; l --) {
-                Layer curr_layer = layers[l];
-                Layer next_layer = layers[l + 1];
+                // calculate neuron delta
+                neuron.delta = (neuron.output - target[n])  *  (neuron.output * (1 - neuron.output)); // sigmoid derivative
 
-                for (int n = 0; n < curr_layer.NumberOfNeurons; n ++) {
-                    Neuron neuron = curr_layer.neurons[n];
+                // for each weight
+                for (int w = 0; w < neuron.weights.Length; w ++) { 
 
-                    double sum = 0.0;
-                    foreach (Neuron next_neuron in next_layer.neurons) {
-                        sum += next_neuron.delta * next_neuron.weights[n];
-                    }
+                    // calculate weight change
+                    double delta_weight = learningRate  *  last_HL.neurons[w].output  *  neuron.delta; 
 
-                    neuron.delta = sum * neuron.f_derivative (neuron.output);
+                    // add the change to the weight
+                    neuron.weights[w] -= delta_weight; 
                 }
             }
 
 
-            /// Change weights ///
-            for (int l = 1; l < NumberOfLayers; l ++) {
-                Layer layer = layers[l];
+            ///// HL /////
+            
+            // for each hidden layer
+            for (int l = layers.Length - 2; l >= 1; l --) {
+                Layer curr_layer = layers[l];
+                
+                // for each neuron in the current layer
+                for (int n = 0; n < curr_layer.NumberOfNeurons; n ++) {
+                    Neuron neuron = curr_layer.neurons[n];
 
-                for (int n = 0; n < layer.NumberOfNeurons; n ++) {
-                    Neuron neuron = layer.neurons[n];
+                    // calculate the sum of all deltas from the next layer, multiplied by their corresponding weight
+                    double delta_sum = 0.0;
+                    foreach (Neuron n_neuron in layers[l + 1].neurons) {
+                        delta_sum += n_neuron.delta  *  n_neuron.weights[n];
+                    }
 
-                    for (int w = 0; w < neuron.NumberOfWeights; w ++) {
-                        double d_w = learningRate * layers[l - 1].neurons[w].output * neuron.delta;
-                        neuron.weights[w] += d_w;
+                    // calculate neuron delta
+                    neuron.delta = delta_sum  *  (1  -  neuron.output * neuron.output); // TanH derivative
+
+                    // for each weight
+                    for (int w = 0; w < neuron.weights.Length; w ++) {
+
+                        // calculate weight change
+                        double delta_weight = learningRate  *  layers[l - 1].neurons[w].output  *  neuron.delta;
+
+                        // add the change to the weight
+                        neuron.weights[w] -= delta_weight;
                     }
                 }
             }

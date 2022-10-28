@@ -151,7 +151,7 @@ namespace Glass_Identification {
 
                     epochError = Global.network.epoch_error_sum / (double) arguments.trainingDataset.Count;
 
-                    if (epoch % 10 == 0) {
+                    if (epoch % 1 == 0) {
                         PointPair point = new PointPair (epoch, epochError);
                         worker.ReportProgress (0, point);
                     }

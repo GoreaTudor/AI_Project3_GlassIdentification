@@ -321,6 +321,7 @@ namespace Glass_Identification {
             // 
             this.t3_zedGraphControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.t3_zedGraphControl.IsShowPointValues = true;
             this.t3_zedGraphControl.Location = new System.Drawing.Point(5, 51);
             this.t3_zedGraphControl.Margin = new System.Windows.Forms.Padding(5);
             this.t3_zedGraphControl.Name = "t3_zedGraphControl";
