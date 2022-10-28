@@ -127,6 +127,28 @@ namespace Glass_Identification {
             t3_btn_stop.Enabled = false;
         }
 
+        private void t3_btn_rescale_Click (object sender, EventArgs e) {
+            double xScale = (double) t3_numericUpDown_XScale.Value;
+            double yScale = (double) t3_numericUpDown_YScale.Value;
+
+            T3_rescaleGraph (xScale, yScale);
+            T3_refreshGraph ();
+        }
+
+
+        private void t4_btn_test_Click (object sender, EventArgs e) {
+            if (networkGenerated) {
+                Console.WriteLine ("Test");
+                T4_testData ();
+
+            } else {
+                Console.WriteLine ("Network not generated!");
+                MyDialog dialog = new MyDialog ("Network not generated!");
+                dialog.ShowDialog ();
+            }
+            
+        }
+
 
         private void mainBackgroundWorker_DoWork (object sender, DoWorkEventArgs e) {
             Console.WriteLine ("BackgroundWorker Started.");
@@ -356,13 +378,25 @@ namespace Glass_Identification {
         }
 
         private void T3_initEpsilon (double epsilon, int numberOfEpochs) {
+            T3_rescaleGraph (numberOfEpochs + 1, 0.5);
+
             epsilonPointsList.Add (1.0, epsilon);
             epsilonPointsList.Add (numberOfEpochs, epsilon);
             T3_refreshGraph ();
         }
 
+        private void T3_rescaleGraph (double x, double y) {
+            t3_zedGraphControl.GraphPane.XAxis.Scale.Min = -1;
+            t3_zedGraphControl.GraphPane.XAxis.Scale.Max = x + 1;
+
+            t3_zedGraphControl.GraphPane.YAxis.Scale.Min = 0;
+            t3_zedGraphControl.GraphPane.YAxis.Scale.Max = y;
+        }
+
         private void T3_refreshGraph () {
             t3_zedGraphControl.AxisChange ();
+            t3_zedGraphControl.Invalidate ();
+            t3_zedGraphControl.Update ();
             t3_zedGraphControl.Refresh ();
         }
 
@@ -409,7 +443,16 @@ namespace Glass_Identification {
                 );
             }
         }
+
+        private void T4_testData () {
+            double percentage = Global.network.testNetwork (Global.TestingData);
+
+            MyDialog dialog = new MyDialog ($"Performance: {HiddenClass.f(percentage)}%");
+            dialog.ShowDialog ();
+        }
+
         #endregion
 
+        
     }
 }

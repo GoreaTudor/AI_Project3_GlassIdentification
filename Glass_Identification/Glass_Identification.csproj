@@ -74,6 +74,12 @@
     <Compile Include="GUI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\MyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MyDialog.Designer.cs">
+      <DependentUpon>MyDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ValueUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MyDialog.resx">
+      <DependentUpon>MyDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ValueUserControl.resx">
       <DependentUpon>ValueUserControl.cs</DependentUpon>

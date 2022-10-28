@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Glass_Identification.Data;
 
 namespace Glass_Identification.AI {
     public class NeuralNetwork {
@@ -154,6 +155,42 @@ namespace Glass_Identification.AI {
 
 
         #region Testing
+        public double testNetwork (List <GlassDataNormalized> testingData) {
+            int correct = 0;
+
+            foreach (GlassDataNormalized item in testingData) {
+                double[] output = toBinaryOutput (feedforward (item.getInputs ()));
+                double[] target = item.getOutputs ();
+
+                if (areEqual(output, target)) {
+                    correct++;
+                }
+            }
+
+            double percentage = ((double) correct / (double) testingData.Count) * 100;
+
+            return (percentage);
+        }
+
+        private double[] toBinaryOutput(double[] output) {
+            double[] binaryOutput = new double[output.Length];
+
+            for (int i = 0; i < output.Length; i ++) {
+                binaryOutput[i] = (output[i] >= 0.5) ? 1 : 0; // sigmoid on OL
+            }
+
+            return binaryOutput;
+        }
+
+        private bool areEqual (double[] output, double[] target) {
+            for (int i = 0; i < output.Length; i++) {
+                if (output[i] != target[i]) {
+                    return false;
+                }    
+            }
+
+            return true;
+        }
         #endregion
     }
 }
