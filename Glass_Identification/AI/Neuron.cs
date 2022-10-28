@@ -25,14 +25,15 @@ namespace Glass_Identification.AI {
             } 
         }
 
+        public double globalInput { get; set; }
         public double output { get; set; }
         public double delta { get; set; }
 
         public double propagateForward (double[] inputs) {
-            double globalInput = 0.0;
+            this.globalInput = 0.0;
 
             for (int w = 0; w < NumberOfWeights; w++) {
-                globalInput += weights[w] * inputs[w];
+                this.globalInput += weights[w] * inputs[w];
             }
 
             this.output = f (globalInput);

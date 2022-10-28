@@ -56,6 +56,7 @@
     <Compile Include="AI\NeuralNetworkUtilities.cs" />
     <Compile Include="AI\Neuron.cs" />
     <Compile Include="AI\OutputNeuron.cs" />
+    <Compile Include="AI\TrainingArguments.cs" />
     <Compile Include="Data\DataMinMax.cs" />
     <Compile Include="Data\DataUtilities.cs" />
     <Compile Include="Data\GlassDataRaw.cs" />

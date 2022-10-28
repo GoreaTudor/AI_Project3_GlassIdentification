@@ -10,7 +10,7 @@ namespace Glass_Identification.AI {
         private Layer[] layers;
         public int NumberOfLayers { get { return layers.Length; } }
 
-        private double epoch_error_sum;
+        public double epoch_error_sum { get; set; }
 
         /// <summary>
         /// Generates a neural network
@@ -79,12 +79,12 @@ namespace Glass_Identification.AI {
 
 
             /// Mean Square Error ///
-            double mse = 0;
+            double sum_error = 0;
             for (int i = 0; i < Global.NumberOfOutputs; i ++) {
                 double val = target[i] - output[i];
-                mse += val * val;
+                sum_error += val * val;
             }
-            mse /= 2.0 * Global.NumberOfOutputs;
+            double mse = sum_error / (2.0 * Global.NumberOfOutputs);
             epoch_error_sum += mse;
 
 
@@ -92,7 +92,7 @@ namespace Glass_Identification.AI {
             Layer OL = layers[NumberOfLayers - 1];
             for (int n = 0; n < OL.NumberOfNeurons; n ++) {
                 Neuron neuron = OL.neurons[n];
-                neuron.delta = (neuron.output - target[n]) * neuron.f_derivative (neuron.output);
+                neuron.delta = (neuron.output - target[n]) * neuron.f_derivative (neuron.globalInput);
             }
 
             for (int l = NumberOfLayers - 2; l >= 0; l --) {

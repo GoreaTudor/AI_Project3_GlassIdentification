@@ -11,6 +11,7 @@ using System.IO;
 using Glass_Identification.Data;
 using Glass_Identification.GUI;
 using Glass_Identification.AI;
+using ZedGraph;
 
 namespace Glass_Identification {
     public partial class MainForm : Form {
@@ -22,38 +23,14 @@ namespace Glass_Identification {
             T3_setup ();
             T4_setup ();
 
-            ;
+            mainBackgroundWorker.WorkerReportsProgress = true;
+            mainBackgroundWorker.WorkerSupportsCancellation = true;
             
             tabChange (this.mainTabControl.SelectedIndex);
         }
 
-        #region Events
-        private void mainTabControl_SelectedIndexChanged (object sender, EventArgs e) {
-            tabChange (this.mainTabControl.SelectedIndex);
-        }
-
-        private void t3_btn_network_Click (object sender, EventArgs e) {
-            List <int> neuronsPerHL = new List <int> ();
-            GenerateNetworkForm form = new GenerateNetworkForm(neuronsPerHL);
-            form.ShowDialog ();
-
-            Global.network = new NeuralNetwork (neuronsPerHL);
-
-            int x = 10;
-        }
-
-        private void t3_btn_start_Click (object sender, EventArgs e) {
-            Console.WriteLine ("Start");
-        }
-
-        private void t3_btn_stop_Click (object sender, EventArgs e) {
-            Console.WriteLine ("Stop");
-        }
-        #endregion
-
         private bool rawDataLoaded = false;
         private bool dataNormalized = false;
-
         private bool networkGenerated {
             get {
                 return (Global.network != null);
@@ -82,7 +59,7 @@ namespace Glass_Identification {
 
                     dataNormalized = true;
                 }
-                
+
             }
 
             if (index >= 2) { // prepare and train the network
@@ -97,6 +74,114 @@ namespace Glass_Identification {
                 T4_loadData ();
             }
         }
+
+
+        #region Events
+        private void mainTabControl_SelectedIndexChanged (object sender, EventArgs e) {
+            tabChange (this.mainTabControl.SelectedIndex);
+        }
+
+        private void t3_btn_network_Click (object sender, EventArgs e) {
+            List <int> neuronsPerHL = new List <int> ();
+            GenerateNetworkForm form = new GenerateNetworkForm(neuronsPerHL);
+            form.ShowDialog ();
+
+            Global.network = new NeuralNetwork (neuronsPerHL);
+
+            t3_btn_start.Enabled = true;
+        }
+
+
+        private void t3_btn_start_Click (object sender, EventArgs e) {
+            if (! mainBackgroundWorker.IsBusy) {
+                t3_btn_start.Enabled = false;
+                t3_btn_stop.Enabled = true;
+
+                T3_clearGraph ();
+
+                TrainingArguments arguments = new TrainingArguments {
+                    epsilon = (double) t3_numericUpDown_epsilon.Value,
+                    learningRate = (double) t3_numericUpDown_learningRate.Value,
+                    numberOfEpochs = (int) t3_numericUpDown_nrOfEpochs.Value,
+                    trainingDataset = Global.TrainingData
+                };
+
+                T3_initEpsilon (arguments.epsilon, arguments.numberOfEpochs);
+
+                Console.WriteLine ("Starting BackgroundWorker...");
+                mainBackgroundWorker.RunWorkerAsync (arguments);
+
+            } else {
+                Console.WriteLine ("Couldn't Start BackgroundWorker!");
+            }
+        }
+
+        private void t3_btn_stop_Click (object sender, EventArgs e) {
+            Console.WriteLine ("Stop");
+
+            if (mainBackgroundWorker.WorkerSupportsCancellation) {
+                mainBackgroundWorker.CancelAsync ();
+            }
+
+            t3_btn_start.Enabled = true;
+            t3_btn_stop.Enabled = false;
+        }
+
+
+        private void mainBackgroundWorker_DoWork (object sender, DoWorkEventArgs e) {
+            Console.WriteLine ("BackgroundWorker Started.");
+
+            BackgroundWorker worker = sender as BackgroundWorker;
+            TrainingArguments arguments = e.Argument as TrainingArguments;
+
+            double epochError = arguments.epsilon + 1;
+
+            for (int epoch = 1; epoch <= arguments.numberOfEpochs && epochError > arguments.epsilon; epoch ++) {
+                if (worker.CancellationPending) {
+                    e.Cancel = true;
+                    Console.WriteLine ("Cancelling BackgroundWorker...");
+                    break;
+
+                } else { /// Inside the epoch ///
+                    Global.network.epoch_error_sum = 0;
+
+                    foreach (GlassDataNormalized item in arguments.trainingDataset) { /// Inside each step ///
+                        Global.network.backpropagation (item.getInputs(), item.getOutputs(), arguments.learningRate);
+                    }
+
+                    epochError = Global.network.epoch_error_sum / (double) arguments.trainingDataset.Count;
+
+                    if (epoch % 10 == 0) {
+                        PointPair point = new PointPair (epoch, epochError);
+                        worker.ReportProgress (0, point);
+                    }
+                }
+            }
+        }
+
+        private void mainBackgroundWorker_ProgressChanged (object sender, ProgressChangedEventArgs e) {
+            PointPair point = e.UserState as PointPair;
+            Console.WriteLine ($"epoch: {point.X} ---> {point.Y}");
+
+            epochPointsList.Add (point);
+            T3_refreshGraph ();
+        }
+
+        private void mainBackgroundWorker_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e) {
+            if (e.Cancelled) {
+                Console.WriteLine ("BackroundWorker Canceled.");
+
+            } else if (e.Error != null) {
+                Console.WriteLine ("BackgroundWorker Error: " + e.Error);
+
+            } else {
+                Console.WriteLine ("BackgroundWorker DONE");
+            }
+
+            t3_btn_start.Enabled = true;
+            t3_btn_stop.Enabled = false;
+        }
+        #endregion
 
 
         #region Tab 1 - raw data
@@ -248,11 +333,43 @@ namespace Glass_Identification {
 
 
         #region Tab 3 - training graph
+        private PointPairList epochPointsList = new PointPairList ();
+        private PointPairList epsilonPointsList = new PointPairList ();
+
         private void T3_setup () {
-            if (Global.network == null) {
+            if (! networkGenerated) {
                 this.t3_btn_start.Enabled = false;
                 this.t3_btn_stop.Enabled = false;
             }
+
+            T3_initGraph ();
+        }
+
+        private void T3_initGraph  () {
+            GraphPane graphPane = t3_zedGraphControl.GraphPane;
+
+            graphPane.XAxis.Title.Text = "Epochs";
+            graphPane.YAxis.Title.Text = "Error";
+
+            graphPane.AddCurve ("Error", epochPointsList, Color.Blue, SymbolType.Circle);
+            graphPane.AddCurve ("Epsilon", epsilonPointsList, Color.Red, SymbolType.Circle);
+        }
+
+        private void T3_initEpsilon (double epsilon, int numberOfEpochs) {
+            epsilonPointsList.Add (1.0, epsilon);
+            epsilonPointsList.Add (numberOfEpochs, epsilon);
+            T3_refreshGraph ();
+        }
+
+        private void T3_refreshGraph () {
+            t3_zedGraphControl.AxisChange ();
+            t3_zedGraphControl.Refresh ();
+        }
+
+        private void T3_clearGraph () {
+            epochPointsList.Clear ();
+            epsilonPointsList.Clear ();
+            T3_refreshGraph ();
         }
         #endregion
 

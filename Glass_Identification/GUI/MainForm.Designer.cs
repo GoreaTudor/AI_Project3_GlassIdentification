@@ -34,6 +34,8 @@ namespace Glass_Identification {
             this.t2_dataGridView_testing = new System.Windows.Forms.DataGridView();
             this.t2_dataGridView_training = new System.Windows.Forms.DataGridView();
             this.tabPage_trainingGraph = new System.Windows.Forms.TabPage();
+            this.t3_numericUpDown_nrOfEpochs = new System.Windows.Forms.NumericUpDown();
+            this.lbl_nrOfEpochs = new System.Windows.Forms.Label();
             this.lbl_espilon = new System.Windows.Forms.Label();
             this.t3_numericUpDown_epsilon = new System.Windows.Forms.NumericUpDown();
             this.t3_btn_stop = new System.Windows.Forms.Button();
@@ -45,6 +47,7 @@ namespace Glass_Identification {
             this.tabPage_testing = new System.Windows.Forms.TabPage();
             this.t4_dataGridView_testing = new System.Windows.Forms.DataGridView();
             this.t4_lbl_testDataset = new System.Windows.Forms.Label();
+            this.mainBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mainTabControl.SuspendLayout();
             this.tabPage_rawData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.t1_dataGridView_raw)).BeginInit();
@@ -52,6 +55,7 @@ namespace Glass_Identification {
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_testing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_training)).BeginInit();
             this.tabPage_trainingGraph.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_nrOfEpochs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_epsilon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_learningRate)).BeginInit();
             this.tabPage_testing.SuspendLayout();
@@ -155,6 +159,8 @@ namespace Glass_Identification {
             // 
             // tabPage_trainingGraph
             // 
+            this.tabPage_trainingGraph.Controls.Add(this.t3_numericUpDown_nrOfEpochs);
+            this.tabPage_trainingGraph.Controls.Add(this.lbl_nrOfEpochs);
             this.tabPage_trainingGraph.Controls.Add(this.lbl_espilon);
             this.tabPage_trainingGraph.Controls.Add(this.t3_numericUpDown_epsilon);
             this.tabPage_trainingGraph.Controls.Add(this.t3_btn_stop);
@@ -170,6 +176,39 @@ namespace Glass_Identification {
             this.tabPage_trainingGraph.Text = "Training Graph";
             this.tabPage_trainingGraph.UseVisualStyleBackColor = true;
             // 
+            // t3_numericUpDown_nrOfEpochs
+            // 
+            this.t3_numericUpDown_nrOfEpochs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t3_numericUpDown_nrOfEpochs.Location = new System.Drawing.Point(221, 530);
+            this.t3_numericUpDown_nrOfEpochs.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.t3_numericUpDown_nrOfEpochs.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.t3_numericUpDown_nrOfEpochs.Name = "t3_numericUpDown_nrOfEpochs";
+            this.t3_numericUpDown_nrOfEpochs.Size = new System.Drawing.Size(120, 30);
+            this.t3_numericUpDown_nrOfEpochs.TabIndex = 9;
+            this.t3_numericUpDown_nrOfEpochs.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // lbl_nrOfEpochs
+            // 
+            this.lbl_nrOfEpochs.AutoSize = true;
+            this.lbl_nrOfEpochs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_nrOfEpochs.Location = new System.Drawing.Point(8, 532);
+            this.lbl_nrOfEpochs.Name = "lbl_nrOfEpochs";
+            this.lbl_nrOfEpochs.Size = new System.Drawing.Size(182, 25);
+            this.lbl_nrOfEpochs.TabIndex = 8;
+            this.lbl_nrOfEpochs.Text = "Number of epochs: ";
+            // 
             // lbl_espilon
             // 
             this.lbl_espilon.AutoSize = true;
@@ -182,14 +221,19 @@ namespace Glass_Identification {
             // 
             // t3_numericUpDown_epsilon
             // 
-            this.t3_numericUpDown_epsilon.DecimalPlaces = 1;
+            this.t3_numericUpDown_epsilon.DecimalPlaces = 2;
             this.t3_numericUpDown_epsilon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.t3_numericUpDown_epsilon.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.t3_numericUpDown_epsilon.Location = new System.Drawing.Point(167, 494);
+            this.t3_numericUpDown_epsilon.Location = new System.Drawing.Point(221, 494);
+            this.t3_numericUpDown_epsilon.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.t3_numericUpDown_epsilon.Name = "t3_numericUpDown_epsilon";
             this.t3_numericUpDown_epsilon.Size = new System.Drawing.Size(120, 30);
             this.t3_numericUpDown_epsilon.TabIndex = 6;
@@ -202,7 +246,7 @@ namespace Glass_Identification {
             // t3_btn_stop
             // 
             this.t3_btn_stop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.t3_btn_stop.BackColor = System.Drawing.Color.Red;
+            this.t3_btn_stop.BackColor = System.Drawing.SystemColors.Control;
             this.t3_btn_stop.Enabled = false;
             this.t3_btn_stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.t3_btn_stop.Location = new System.Drawing.Point(1369, 460);
@@ -216,7 +260,7 @@ namespace Glass_Identification {
             // t3_btn_start
             // 
             this.t3_btn_start.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.t3_btn_start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.t3_btn_start.BackColor = System.Drawing.SystemColors.Control;
             this.t3_btn_start.Enabled = false;
             this.t3_btn_start.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.t3_btn_start.Location = new System.Drawing.Point(1283, 460);
@@ -246,7 +290,12 @@ namespace Glass_Identification {
             0,
             0,
             65536});
-            this.t3_numericUpDown_learningRate.Location = new System.Drawing.Point(167, 458);
+            this.t3_numericUpDown_learningRate.Location = new System.Drawing.Point(221, 458);
+            this.t3_numericUpDown_learningRate.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.t3_numericUpDown_learningRate.Name = "t3_numericUpDown_learningRate";
             this.t3_numericUpDown_learningRate.Size = new System.Drawing.Size(120, 30);
             this.t3_numericUpDown_learningRate.TabIndex = 2;
@@ -312,12 +361,18 @@ namespace Glass_Identification {
             // 
             this.t4_lbl_testDataset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.t4_lbl_testDataset.AutoSize = true;
-            this.t4_lbl_testDataset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.t4_lbl_testDataset.Location = new System.Drawing.Point(8, 277);
+            this.t4_lbl_testDataset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t4_lbl_testDataset.Location = new System.Drawing.Point(3, 288);
             this.t4_lbl_testDataset.Name = "t4_lbl_testDataset";
-            this.t4_lbl_testDataset.Size = new System.Drawing.Size(134, 25);
+            this.t4_lbl_testDataset.Size = new System.Drawing.Size(148, 25);
             this.t4_lbl_testDataset.TabIndex = 0;
             this.t4_lbl_testDataset.Text = "Test Dataset: ";
+            // 
+            // mainBackgroundWorker
+            // 
+            this.mainBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.mainBackgroundWorker_DoWork);
+            this.mainBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.mainBackgroundWorker_ProgressChanged);
+            this.mainBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.mainBackgroundWorker_RunWorkerCompleted);
             // 
             // MainForm
             // 
@@ -336,6 +391,7 @@ namespace Glass_Identification {
             ((System.ComponentModel.ISupportInitialize)(this.t2_dataGridView_training)).EndInit();
             this.tabPage_trainingGraph.ResumeLayout(false);
             this.tabPage_trainingGraph.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_nrOfEpochs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_epsilon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.t3_numericUpDown_learningRate)).EndInit();
             this.tabPage_testing.ResumeLayout(false);
@@ -367,5 +423,8 @@ namespace Glass_Identification {
         private System.Windows.Forms.Label lbl_espilon;
         private System.Windows.Forms.Label t4_lbl_testDataset;
         private System.Windows.Forms.DataGridView t4_dataGridView_testing;
+        private System.ComponentModel.BackgroundWorker mainBackgroundWorker;
+        private System.Windows.Forms.Label lbl_nrOfEpochs;
+        private System.Windows.Forms.NumericUpDown t3_numericUpDown_nrOfEpochs;
     }
 }
