@@ -341,7 +341,6 @@ namespace Glass_Identification {
                     item.IronPercentage,        // 10
 
                     item.Type_1,
-                    item.Type_1,
                     item.Type_2,
                     item.Type_3,
                     item.Type_4,
@@ -433,7 +432,6 @@ namespace Glass_Identification {
                     item.IronPercentage,        // 10
 
                     item.Type_1,
-                    item.Type_1,
                     item.Type_2,
                     item.Type_3,
                     item.Type_4,
@@ -447,7 +445,7 @@ namespace Glass_Identification {
         private void T4_testData () {
             double percentage = Global.network.testNetwork (Global.TestingData);
 
-            MyDialog dialog = new MyDialog ($"Performance: {HiddenClass.f(percentage)}%");
+            MyDialog dialog = new MyDialog ($"Performance: {percentage}%");
             dialog.ShowDialog ();
         }
 
